@@ -1,0 +1,329 @@
+(1)--------what is emmet------------------------
+-Emmet is a popular and powerful web development tool that helps streamline and expedite the process of writing HTML and CSS code. It's essentially a set of abbreviations and shortcuts that can be expanded into complete HTML and CSS code blocks, saving web developers time and effort when creating web pages and styling them.
+
+Key features and benefits of Emmet include:
+
+1. Abbreviations: Emmet allows you to use shorthand notations and abbreviations to represent common HTML and CSS patterns. For example, you can type `ul>li*3` and expand it into an unordered list with three list items.
+
+2. Nested Elements: You can nest elements easily by using the `>` operator, making it convenient to create complex HTML structures quickly.
+
+3. Numeric Multiplication: Emmet supports numeric multiplication to repeat elements, making it simple to generate repetitive code elements like lists, tables, or grids.
+
+4. CSS Selectors: It also supports shorthand notations for CSS selectors and properties, allowing for efficient styling of HTML elements.
+
+5. Customization: Emmet can be customized to suit your preferred coding style and include custom abbreviations or snippets.
+
+Emmet is often integrated into code editors and integrated development environments (IDEs) like Visual Studio Code, Sublime Text, and others, making it a valuable tool for web developers who want to boost their productivity and write cleaner, more efficient code. It helps developers write more with less typing, reducing the likelihood of typos and syntax errors.
+
+(2)-----what is cdn?why do we use it?----------
+-A CDN, or Content Delivery Network, is a network of servers strategically distributed across multiple geographic locations to deliver web content, such as images, scripts, stylesheets, videos, and other assets, to users more efficiently and quickly.
+-CDNs are used to enhance website performance, availability, and security while reducing the load on the origin server and the latency experienced by users. They are an essential tool for modern web development and content delivery, especially for websites and applications with a global user base or high traffic volumes.
+
+(3)-------why is React know as react?---------
+-React, the JavaScript library for building user interfaces, is called "React" because it reflects one of its core design principles: reactivity. React was developed by Facebook, and its name conveys the idea of creating user interfaces that react to changes in data. This concept of reactivity is a fundamental aspect of how React works.
+
+In traditional web development, when data changes, developers often had to manually manipulate the Document Object Model (DOM) to update the user interface. This process could be complex and error-prone. React, on the other hand, introduced a new way of thinking about UI development
+
+(4)--------what is cross-origin in the script tag?----
+-the crossorigin attribute is a security measure to ensure that external resources like scripts are loaded safely and securely, especially when loading them from different domains or CDNs.
+
+(5)----what is the difference between React and ReactDOM?
+
+- React is the core library for building user interfaces in a platform-agnostic way, while ReactDOM is a package that provides the necessary tools for rendering React components to the web browser's DOM. Depending on the platform (web, mobile, desktop), you may use different packages for rendering React components to the corresponding user interface technology.
+
+(6)--what are async and defer?------ -`async` and `defer` are attributes that can be used with the `<script>` element in HTML to control how scripts are loaded and executed on a web page. They are used to influence the timing and order in which scripts are fetched and run, particularly in relation to the HTML parsing process. Here's an explanation of both attributes:
+
+1. **`async` Attribute:**
+
+   - When you add the `async` attribute to a `<script>` tag, it indicates to the browser that the script can be loaded asynchronously while the HTML parsing continues.
+   - The script will be fetched in the background and executed as soon as it is downloaded, without waiting for the HTML parsing to complete.
+   - Scripts with the `async` attribute may execute out of order, depending on which one finishes downloading first.
+   - This attribute is useful for scripts that don't rely on the order of execution or for non-blocking scripts like analytics or ads.
+
+   Example:
+
+   ```html
+   <script src="script.js" async></script>
+   ```
+
+2. **`defer` Attribute:**
+
+   - When you add the `defer` attribute to a `<script>` tag, it also indicates to the browser that the script should be loaded asynchronously.
+   - However, scripts with the `defer` attribute are guaranteed to be executed in the order they appear in the HTML, after the HTML parsing is complete but before the `DOMContentLoaded` event.
+   - This attribute is useful for scripts that depend on the DOM structure or need to execute in a specific order, such as scripts that manipulate the DOM or interact with page elements.
+
+   Example:
+
+   ```html
+   <script src="script.js" defer></script>
+   ```
+
+In summary:
+
+- Use `async` when the script doesn't depend on other scripts or the DOM and can be executed as soon as it's downloaded.
+- Use `defer` when you want to ensure that the scripts are executed in order after the HTML parsing is complete but before the `DOMContentLoaded` event.
+
+Both attributes help improve page loading performance by allowing the HTML parser to continue parsing the document without blocking on script execution. However, the choice between `async` and `defer` depends on your specific script dependencies and when you want them to run in relation to the HTML parsing process.
+
+//(2)IGNITING THE APP--
+--------PARCEL BUNDLER-----
+-Dev build
+-local server
+-HMR = hot module replacement
+-file watching algorith, - written in c++
+-caching - faster builds
+-image optimization
+-minification
+-bundling
+-compress
+-consistent hashing
+-code splitting
+-Differential bundling - support older browsers
+-diagnostic
+-error handling
+-hosts app on https
+-tree shaking - remove unused code
+
+///creating react app without using cdn links + installing important packages and bundler.
+steps -> commands ->
+
+1. npm init
+   2)package name ->
+
+//-------props---------
+-props is a short form for properties,properties is a something which u can pass to the component
+-props at the end of the day are just normal arguments to a function.
+-passing a prop to a component is just like passing an argument to a function
+
+--two types of export/import----
+
+1)default export/import
+
+export default Component;
+import Compoenent from "path";
+
+2)named export/import
+
+export const component;
+import {component} from "path";
+
+////--------hooks lesson -------
+folder structure
+src - folder m sara source code hoga
+also dont forget to change the path in script tag </.src/app.js>
+
+create components folder inside the src
+-Header.js
+-body.js
+-RestaurantCard.js
+
+- read blog about file structure from react offical site
+
+- try to name a file same as component
+- .jsx and .js koi farak nahi padta kuch bhi likho
+
+//import and export in React
+-before importing always export first
+
+-export default Header(name of the component);
+-import Header from "./components/Header or Header.js"(path) ;-> if u dont put.js it will work fine so ill prefer Header only
+
+-whenever you have any hard coded data you never keep it in your components file never Eg-> restlist , cdn url , logo hard coded string
+
+standard way - to keep all this in file utils means utilities that will be used all across your app.
+utils
+-constants.js //starting with small alpahbet because its not components
+-const LOGO_URL -it is good habit to name constants captital letters
+
+-mockdata.js
+-restlist object
+
+HOMEWORK (Q)- can WE use default and name export combine?
+
+--------React HOOKS----------
+suppose we have to create a button which shows top rated restaurants
+
+body.js-
+//-----very very very important concept ----------
+
+ <div className="filter">
+        <button
+          className="filter-btn"
+          onClick={() => {
+            // Example filtering logic, you may need to modify this
+            const filteredList = listOfRestaurants.filter(
+              (res) => res.data.rating > 4
+            );
+            setListOfRestraunt(filteredList);
+          }}
+        > Top Rated Restaurants
+        </button>
+      </div>
+
+///but the ui is not getting updated after clicking top rated button
+//if you give this listofrestaurant super powers of react it will become super powerful react variable also called ->
+
+state variable for that we use hook which is know as -> useState
+-A react hook is just a normal js utility function written by facebook developers
+-there are twi imp hooks
+1)useState()- 80% times writing this use to genrate superpowerful Variables in react
+
+2)useEffect() - 20%
+how to use ?
+1)useState
+import { useState } from "react";
+-why is it call state varible because it maintains the state of your component
+
+## HOw to create state variable?
+
+const [listOfRestaurants] = useState([]); //whatever we pass it becomes default value eg-we pass empty array
+
+/\*normal js variable
+let listOfRestaurants= [
+{
+
+}
+]
+\*/
+
+Q) how to use variable ?
+-same like normal variable
+
+## how to modify this variable?
+
+const [listOfRestaurants] = useState([{
+
+}]);
+
+listOfRestaurants = [] //you cannot modify it like this.
+
+we can modify it by a function.
+-function comes as a second parameter in the array
+
+-we can names this whatever we wish to but it is a prefered convention in the industry
+-if the name is listofrestaurant put it setlistofrestaurant basically applying set before it
+
+const [listOfRestaurants, setListOfRestaurant] = useState([{
+
+}]);
+
+so , setlistofrestaurant is used to update this list.
+
+suppose when you click the button u want to update the restaurants
+
+## updating the state variable
+
+const [listOfRestaurants, setListOfRestaurant] = useState([{
+
+}]);
+
+return (
+
+<div className="body">
+<div className="filter">
+<button
+className="filter-btn"
+onClick={() => {
+
+            const filteredList = listOfRestaurants.filter(
+              (res) => res.data.rating > 4
+            );
+            setListOfRestraunt(filteredList);  //passing filtered list inside the listofrestaurant
+          }}
+        >
+          Top Rated Restaurants
+        </button>
+      </div>
+
+//so the powerful react variable keeps ui insinc with the variable and this is known as render
+-whenever a state variable changes React rerenders the component .
+
+//How react work behind the scenes
+
+react uses reconcilation algo also known as react fiber
+
+//------API //lesson 6----------
+
+-Web apps have two key approaches to fetch data from the backend:
+
+1.Load -> API -> Render
+2.Load -> Render -> API -> Render
+In React, we often opt for the second approach, offering a smoother UX. Users experience less lag, making the interaction feel lightning-fast.
+
+//useEffect hook
+import {useState, useEffect} from "react;
+
+syntax-
+it takes two arguments
+first -> arrow function callback function
+second-> dependency array
+
+useEffect(() => {
+console.log("useEffect called");
+}, []);
+
+## when this useEffect callback function will call?
+
+-after your component will render
+-so if we have to do something after rendering the component you hvae to write it inside a useEffect.
+
+Q)what will be printed first ?
+
+useEffect(() => {
+console.log("useEffect called");
+}, []);
+
+console.log("bODY rendered");
+
+op-
+Body renedered
+useEffectCalled
+
+-useEffect will helpful for second approach to fetch data
+-fetch is a super power which is given to us by javascript?no its not given to us by javascript its given to us by browsers
+
+useEffect(() => {
+fetchData();
+}, []
+);
+
+const fetchData = () => {
+const data = fetch()
+}
+
+fetch() return a promise how to resolve a promise ->using async await
+const fetchData = async () => {
+const data = await fetch("Api")
+}
+
+now ,
+we have to convert this data into json
+
+const json = await data.json();
+
+console.log(json)
+
+imp error -> has been blocked by CORS policy
+our browsers blocking us to call api from one origin to another origin
+
+remedy-> add Allow CORS chrome extension
+
+loads -> render -> API -> render
+
+last step ->
+as soon as we got this data we put this data into listofrestaurant and it will update the ui with the new data
+
+setListOfRestaurant(json.data.cards[2].data.data.cards)
+more decent code using optional chaining ->
+setListOfRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+
+lets suppose we have added a loading.. before the time our data is loaded but this is not a good way
+
+today in the industry what happend ->
+
+---shimmerUI---
+shimmer UI resembles the page's actual UI, so users will understand how quickly the web or mobile app will load even before the content has shown up.it is kind of like we load fake page until we get actual data from the API
+
+//conditional rendering (interview question )
+if (listOfRestaurants.length === 0) {
+return <Shimmer />;

@@ -1,0 +1,148 @@
+.header {
+  color: #fff;
+  border: 1px solid #d1a0a0;
+  border-radius: 10px;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding: 10px 20px;
+  transition: background .3s ease-in-out;
+  animation: 10s linear infinite colorChange;
+  display: flex;
+  box-shadow: 0 4px 6px #0000001a;
+}
+
+.nav-items ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+.nav-items li {
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.nav-items li:last-child {
+  margin-right: 0;
+}
+
+.app {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.res-card {
+  background: linear-gradient(90deg, #6f8fa6, #c0c2c4);
+  border-radius: 10px;
+  width: 200px;
+  height: 400px;
+  margin: 5px;
+  padding: 1px;
+}
+
+.res-card:hover {
+  cursor: pointer;
+  border: 1px outset #d1a0a0;
+  box-shadow: 0 2px 4px #f1a655;
+}
+
+.search {
+  background: linear-gradient(90deg, #1a1212, #c3b7b7);
+  border-radius: 10px;
+  width: 50px;
+  height: 20px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.ramen-image {
+  border-radius: 10px;
+  width: 180px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.res-container {
+  border-radius: 10px;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+@media (width <= 768px) {
+  .container {
+    padding: 10px;
+  }
+}
+
+li:hover {
+  cursor: pointer;
+  border: 1px outset #d1a0a0;
+  box-shadow: 0 2px 4px #f1a655;
+}
+
+.container {
+  perspective: 800px;
+}
+
+.logo {
+  background-image: url("https://pbs.twimg.com/media/F71LsL8W4AA9faj?format=jpg&name=900x900");
+  background-size: cover;
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+  transition: transform 1s ease-in-out;
+  transform: rotateY(0);
+}
+
+.logo:hover {
+  transform: rotateY(180deg);
+}
+
+.filter-btn {
+  cursor: pointer;
+  background: linear-gradient(90deg, #6f8fa6, #c0c2c4);
+  border-radius: 10px;
+  margin: 10px;
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: #6f7be0;
+  }
+
+  33.33% {
+    background-color: #313435;
+  }
+
+  66.66% {
+    background-color: #72c894;
+  }
+
+  88.66% {
+    background-color: #c9d0d4;
+  }
+
+  100% {
+    background-color: #6f7be0;
+  }
+}
+
+.Shimmer-container {
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.Shimmer-card {
+  background: linear-gradient(90deg, #6f8fa6, #c0c2c4);
+  border-radius: 10px;
+  width: 100px;
+  height: 200px;
+  margin: 20px;
+  padding: 20px;
+}
+
+/*# sourceMappingURL=index.9e4c6fd2.css.map */
