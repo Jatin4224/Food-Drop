@@ -327,3 +327,719 @@ shimmer UI resembles the page's actual UI, so users will understand how quickly 
 //conditional rendering (interview question )
 if (listOfRestaurants.length === 0) {
 return <Shimmer />;
+
+/////////////////Restarting from ep-4 //////////////////////
+
+lets learn React by creating a food Delivery app
+
+/////////////////chapter - 1 ////////////////
+
+///////part 1////
+
+-first thing we need to do before creating any app is planning
+
+/\*
+lets talk about component what components our app have
+1.Header
+-Logo
+-Nav items
+
+2.Body
+-Search
+-RestaurantContainer
+-RestaurantCard
+-Img
+-Name of Res, star Rating, cuisine, delivery time
+
+- 3.Footer
+  -CopyRight
+  -Links
+  -Address
+  -contact
+  \*/
+
+lets build top level component lets call it App layout component
+what is a component?
+-is a function that returns some JSX code kine of like big div
+file -APP.jsx
+
+const AppLayout = () => {
+return (
+
+  <div className = "app">
+  //Header
+  //Body
+  //Footer
+  </div>
+)
+}
+
+-now lets build our Header first
+
+const Header = () => {
+return (
+//header will have logo and nav items
+
+<div className="header">
+//add logo
+<div>
+<img className="logo" src = "logo-img-url"/>
+</div>
+//nav items
+<div className="nav-items">
+ 
+      <ul>
+          <li>Home</li>
+          <li>About Us</li>
+          <li>Contact Us</li>
+          <li>Cart</li>
+        </ul>
+</div>
+)
+}
+const root = document.getElementById("root");
+
+ReactDOM.render(<AppLayout />, root);
+
+now i created the header component but how i put this header component inside the AppLayout
+there are multiple ways
+const AppLayout = () => {
+return (
+
+  <div className = "app">
+  //Header
+  <Header />  //header component 
+  //Body
+  //Footer
+  </div>
+)
+}
+-u can add css to make it more cool but later i will teach u tailwind and some cool resources  we will make this project ui more cool.
+so u will nowknow how to create component in react trust me react is so easy u just have to learn at steady pace and do pratice.
+
+//
+const Body = () => {
+return (
+
+<div className="body">
+//search bar 
+<div className="search">Search</div>
+<div className="res-container">
+//we need lot of restaurant cards in it so we will make seprate  component  for restaurant cards u know why we create a component ,its just like a function and why do we make function in our program so we can re use it so similary when we need component that will be reused so make it seprate new component
+
+)
+}
+//lets create restaurantcard component and think what this card have
+
+const RestaurantCard = () => {
+return (
+
+<div className="res-card">
+<img className="res-logo"
+alt="res-logo"
+src="image-url"
+/>
+<h3>food custom></h3>
+<h4>Biryani,paneer tikka,Asian</h4>
+<h4>4.4 star</h4>
+<h4>38 minutes</h4>
+ </div>
+);
+};
+dont forget to add this component inside the res-container-
+
+const Body = () => {
+return (
+
+<div className="body">
+//search bar 
+<div className="search">Search</div>
+<div className="res-container">
+<RestaurantCard/>
+</div>
+</div>
+)};
+
+now,u have succesfully created one restaurant card but its not good if u have only one restaurant card on your app right?so lets add more restaurant cards but u dont have to create a restaurantcard component again u will can add lot of cards in the res-container by just writing <RestaurantCard/> inside it .lets suppose we want 8 cards in the layout -
+
+const Body = () => {
+return (
+
+<div className="body">
+//search bar 
+<div className="search">Search</div>
+<div className="res-container">
+<RestaurantCard/> //card 1 - food custom
+<RestaurantCard/> //card 2 - kfc 
+<RestaurantCard/> //card 3 - xyz rest
+<RestaurantCard/>
+<RestaurantCard/>
+<RestaurantCard/>
+<RestaurantCard/>
+</div>
+</div>
+)};
+ u will get vertically lined cards so if u want to make it more good looking u dont forget to add some css flex properties  on res-container
+.res-container {
+  margin: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+if u want to improve your css flex skills try this game -
+https://flexboxfroggy.com/
+
+-Now,I just hardcoded things over here the data wont comes like this,how will i make my cards dynamic?i i have food-cutom card but i want to make another card for kfc but how would i do that i want u to revise the things till here and impliment it by your own coding is not only learning its more about implementing things u learn .then i will show u how to make cards dynamic and we will learn reacts next concept by creating it .
+
+///part 2 -
+
+welcome back ,now lets create card for kfc restaurant and for that i will introduce you the new concept which is called -> Props (short form of properties)
+
+- properties is something you can pass to components
+  -what is a component its just a normal javascript function similarly props are just normal arguments to a function .when i saying im passing some props to a components im basically saying im passing some argument to a function
+
+let me show u how to pass prop into a component
+
+<RestaurantCard
+resName="food custom" //passing props
+cuisine="Biryani,paneer tikka, Asian" //passing props
+/>
+//
+<RestaurantCard/>
+
+now what react does it will take the props and wrap it inside the object and it will pass over here as a props const fun = (props) =>
+const RestaurantCard = (props) => {
+
+//so this props will be an object now ,u dont trust me ?see it by yourself by loggin it
+
+console.log(props);
+//output image
+
+}
+
+now i want to use this prop and make card dynamic but how can i do that i will read this props this props are js object and u know how to use js just wrap it isnide curly braces
+
+const RestaurantCard = (props) => {
+return (
+
+<div className="res-card">
+<img className="res-logo"
+alt="res-logo"
+src="image-url"
+/>
+<h3>{props.resName}</h3>
+<h4>{props.cuisine}</h4>
+<h4>4.4 star</h4>
+<h4>38 minutes</h4>
+ </div>
+);
+};
+
+const Body = () => {
+return (
+
+<div className="body">
+//search bar 
+<div className="search">Search</div>
+<div className="res-container">
+<RestaurantCard
+resName="food custom" //passing props
+cuisine="Biryani,paneer tikka, Asian" //passing props
+/>
+//
+<RestaurantCard/>
+)};
+
+when u have to dynamically pass some data to a component u pass it as a prop.
+
+## -we can write props by destructing on the fly
+
+const RestaurantCard = ({ resName, cuisine }) => {
+return (
+
+<div className="res-card">
+<img className="res-logo"
+alt="res-logo"
+src="image-url"
+/>
+<h3>{resName}</h3>
+<h4>{cuisine}</h4>
+<h4>4.4 star</h4>
+<h4>38 minutes</h4>
+ </div>
+);
+};
+
+its just normal js its basically doing this -
+
+const RestaurantCard = (props) => {
+const { resName, cuisine } = props;
+
+now let me tell u one more way to pass the data
+how does data come from backend to us ??
+-it will come in a form of json.
+//screenshot add karna h swigyy m network m hakr data ka.
+
+and dont forget to install json viewer chrome extension it will help u too see the data clearly on broswer .
+
+## imp concept - conflict driven UI
+
+-SUPPOSE u will open any ecommerce app and see different offers in different cities and in some cities there are no offers so how as an developer i will build ui like that i will not build different ui applications for different cities right?our ui is driven by data so the conflict driven ui means all the ui is driven by conflict and what is the the data is the conflict.suppose this data is different for each cities and by this data our ui is changed thats why the data comes according to that this is imp concept to remember might be asked in intervies .
+
+-ui layer and data layer bot layers make frontend application.very important to be good at both.
+
+now i will gonna add some real data in our app i will use the data from swiggy site
+i know u will struggle searching the data from swiggy site dont worry i will giving the data here u can copy it
+
+                                "type": "restaurant",
+                                "data": {
+                                    "type": "F",
+                                    "id": "610732",
+                                    "name": "KFC",
+                                    "uuid": "b1ba9a5e-2601-4cff-8e07-3fea35cb8d7d",
+                                    "city": "4",
+                                    "area": "Dwarka More",
+                                    "totalRatingsString": "500+ ratings",
+                                    "cloudinaryImageId": "56c9ab92bd79745fd152a30fa2525426",
+                                    "cuisines": [
+                                        "Burgers",
+                                        "Biryani",
+                                        "American",
+                                        "Snacks",
+                                        "Fast Food"
+                                    ],
+                                    "tags": [],
+                                    "costForTwo": 40000,
+                                    "costForTwoString": "₹400 FOR TWO",
+                                    "deliveryTime": 25,
+                                    "minDeliveryTime": 25,
+                                    "maxDeliveryTime": 25,
+                                    "slaString": "25 MINS",
+                                    "lastMileTravel": 1.100000023841858,
+                                    "slugs": {
+                                        "restaurant": "kfc-dwarka-mor-uttam-nagar",
+                                        "city": "delhi"
+                                    },
+                                    "cityState": "4",
+                                    "address": "KFC Restaurant B-2,Rama Part near dwarka more metro station. New Delhi 110059.",
+                                    "locality": "Metro Station",
+                                    "parentId": 547,
+                                    "unserviceable": false,
+                                    "veg": false,
+                                    "select": false,
+                                    "favorite": false,
+                                    "tradeCampaignHeaders": [],
+                                    "aggregatedDiscountInfo": {
+                                        "header": "40% off",
+                                        "shortDescriptionList": [
+                                            {
+                                                "meta": "40% off | Use SWIGGYIT",
+                                                "discountType": "Percentage",
+                                                "operationType": "RESTAURANT"
+                                            }
+                                        ],
+                                        "descriptionList": [
+                                            {
+                                                "meta": "40% off up to ₹80 on select items | Use code SWIGGYIT",
+                                                "discountType": "Percentage",
+                                                "operationType": "RESTAURANT"
+                                            }
+                                        ],
+                                        "subHeader": "",
+                                        "headerType": 0,
+                                        "superFreedel": ""
+                                    },
+                                    "aggregatedDiscountInfoV2": {
+                                        "header": "40% OFF",
+                                        "shortDescriptionList": [
+                                            {
+                                                "meta": "Use SWIGGYIT",
+                                                "discountType": "Percentage",
+                                                "operationType": "RESTAURANT"
+                                            }
+                                        ],
+                                        "descriptionList": [
+                                            {
+                                                "meta": "40% off up to ₹80 on select items | Use code SWIGGYIT",
+                                                "discountType": "Percentage",
+                                                "operationType": "RESTAURANT"
+                                            }
+                                        ],
+                                        "subHeader": "",
+                                        "headerType": 0,
+                                        "superFreedel": ""
+                                    },
+                                    "ribbon": [
+                                        {
+                                            "type": "PROMOTED"
+                                        }
+                                    ],
+                                    "chain": [],
+                                    "feeDetails": {
+                                        "fees": [
+                                            {
+                                                "name": "distance",
+                                                "fee": 3800,
+                                                "message": ""
+                                            },
+                                            {
+                                                "name": "time",
+                                                "fee": 0,
+                                                "message": ""
+                                            },
+                                            {
+                                                "name": "special",
+                                                "fee": 0,
+                                                "message": ""
+                                            }
+                                        ],
+                                        "totalFees": 3800,
+                                        "message": "",
+                                        "title": "Delivery Charge",
+                                        "amount": "3800",
+                                        "icon": ""
+                                    },
+                                    "availability": {
+                                        "opened": true,
+                                        "nextOpenMessage": "",
+                                        "nextCloseMessage": ""
+                                    },
+                                    "longDistanceEnabled": 0,
+                                    "rainMode": "NONE",
+                                    "thirdPartyAddress": false,
+                                    "thirdPartyVendor": "",
+                                    "adTrackingID": "cid=6536729~p=1~eid=00000187-c40c-d21c-0a4b-b18c000c013c",
+                                    "badges": {
+                                        "imageBased": [],
+                                        "textBased": [],
+                                        "textExtendedBadges": []
+                                    },
+                                    "lastMileTravelString": "1.1 kms",
+                                    "hasSurge": false,
+                                    "sla": {
+                                        "restaurantId": "610732",
+                                        "deliveryTime": 25,
+                                        "minDeliveryTime": 25,
+                                        "maxDeliveryTime": 25,
+                                        "lastMileTravel": 1.100000023841858,
+                                        "lastMileDistance": 0,
+                                        "serviceability": "SERVICEABLE",
+                                        "rainMode": "NONE",
+                                        "longDistance": "NOT_LONG_DISTANCE",
+                                        "preferentialService": false,
+                                        "iconType": "EMPTY"
+                                    },
+                                    "promoted": true,
+                                    "avgRating": "4.0",
+                                    "totalRatings": 500,
+                                    "new": false
+                                },
+                                "subtype": "basic"
+                            },
+
+now copy this data in the file app.js -
+
+const resObj = {
+
+                                "type": "restaurant",
+                                "data": {
+                                    "type": "F",
+                                    "id": "610732",
+                                    "name": "KFC",
+                                    "uuid": "b1ba9a5e-2601-4cff-8e07-3fea35cb8d7d",
+                                    "city": "4",
+                                    "area": "Dwarka More",
+                                    "totalRatingsString": "500+ ratings",
+                                    "cloudinaryImageId": "56c9ab92bd79745fd152a30fa2525426",
+                                    "cuisines": [
+                                        "Burgers",
+                                        "Biryani",
+                                        "American",
+                                        "Snacks",
+                                        "Fast Food"
+                                    ],
+                                    "tags": [],
+                                    "costForTwo": 40000,
+                                    "costForTwoString": "₹400 FOR TWO",
+                                    "deliveryTime": 25,
+                                    "minDeliveryTime": 25,
+                                    "maxDeliveryTime": 25,
+                                    "slaString": "25 MINS",
+                                    "lastMileTravel": 1.100000023841858,
+                                    "slugs": {
+                                        "restaurant": "kfc-dwarka-mor-uttam-nagar",
+                                        "city": "delhi"
+                                    },
+                                    "cityState": "4",
+                                    "address": "KFC Restaurant B-2,Rama Part near dwarka more metro station. New Delhi 110059.",
+                                    "locality": "Metro Station",
+                                    "parentId": 547,
+                                    "unserviceable": false,
+                                    "veg": false,
+                                    "select": false,
+                                    "favorite": false,
+                                    "tradeCampaignHeaders": [],
+                                    "aggregatedDiscountInfo": {
+                                        "header": "40% off",
+                                        "shortDescriptionList": [
+                                            {
+                                                "meta": "40% off | Use SWIGGYIT",
+                                                "discountType": "Percentage",
+                                                "operationType": "RESTAURANT"
+                                            }
+                                        ],
+                                        "descriptionList": [
+                                            {
+                                                "meta": "40% off up to ₹80 on select items | Use code SWIGGYIT",
+                                                "discountType": "Percentage",
+                                                "operationType": "RESTAURANT"
+                                            }
+                                        ],
+                                        "subHeader": "",
+                                        "headerType": 0,
+                                        "superFreedel": ""
+                                    },
+                                    "aggregatedDiscountInfoV2": {
+                                        "header": "40% OFF",
+                                        "shortDescriptionList": [
+                                            {
+                                                "meta": "Use SWIGGYIT",
+                                                "discountType": "Percentage",
+                                                "operationType": "RESTAURANT"
+                                            }
+                                        ],
+                                        "descriptionList": [
+                                            {
+                                                "meta": "40% off up to ₹80 on select items | Use code SWIGGYIT",
+                                                "discountType": "Percentage",
+                                                "operationType": "RESTAURANT"
+                                            }
+                                        ],
+                                        "subHeader": "",
+                                        "headerType": 0,
+                                        "superFreedel": ""
+                                    },
+                                    "ribbon": [
+                                        {
+                                            "type": "PROMOTED"
+                                        }
+                                    ],
+                                    "chain": [],
+                                    "feeDetails": {
+                                        "fees": [
+                                            {
+                                                "name": "distance",
+                                                "fee": 3800,
+                                                "message": ""
+                                            },
+                                            {
+                                                "name": "time",
+                                                "fee": 0,
+                                                "message": ""
+                                            },
+                                            {
+                                                "name": "special",
+                                                "fee": 0,
+                                                "message": ""
+                                            }
+                                        ],
+                                        "totalFees": 3800,
+                                        "message": "",
+                                        "title": "Delivery Charge",
+                                        "amount": "3800",
+                                        "icon": ""
+                                    },
+                                    "availability": {
+                                        "opened": true,
+                                        "nextOpenMessage": "",
+                                        "nextCloseMessage": ""
+                                    },
+                                    "longDistanceEnabled": 0,
+                                    "rainMode": "NONE",
+                                    "thirdPartyAddress": false,
+                                    "thirdPartyVendor": "",
+                                    "adTrackingID": "cid=6536729~p=1~eid=00000187-c40c-d21c-0a4b-b18c000c013c",
+                                    "badges": {
+                                        "imageBased": [],
+                                        "textBased": [],
+                                        "textExtendedBadges": []
+                                    },
+                                    "lastMileTravelString": "1.1 kms",
+                                    "hasSurge": false,
+                                    "sla": {
+                                        "restaurantId": "610732",
+                                        "deliveryTime": 25,
+                                        "minDeliveryTime": 25,
+                                        "maxDeliveryTime": 25,
+                                        "lastMileTravel": 1.100000023841858,
+                                        "lastMileDistance": 0,
+                                        "serviceability": "SERVICEABLE",
+                                        "rainMode": "NONE",
+                                        "longDistance": "NOT_LONG_DISTANCE",
+                                        "preferentialService": false,
+                                        "iconType": "EMPTY"
+                                    },
+                                    "promoted": true,
+                                    "avgRating": "4.0",
+                                    "totalRatings": 500,
+                                    "new": false
+                                },
+                                "subtype": "basic"
+                            },
+
+}
+
+now suppose i have to pass this data in the restaurantcard will i keep passing it one by one reName ,cuisin etc ofcource not
+so i will just pass it like this
+remember its js object so we will use {} brackets
+resData={resData}
+
+const Body = () => {
+return (
+
+<div className="body">
+//search bar 
+<div className="search">Search</div>
+<div className="res-container">
+<RestaurantCard
+resData = {resObj}
+/>
+//
+<RestaurantCard/>
+)};
+
+//
+const RestaurantCard = (props) => {
+const {resData} = props;
+
+//and from resData we can use this data
+
+//another concept to teach u
+//photo exacli draw se
+
+-so basically resData is a prop
+and resObj is an argument real data ur are passing.
+lets use this data.
+
+const RestaurantCard = (props) => {
+const { resData } = props;
+return (
+
+<div className="res-card">
+<img
+        className="ramen-image"
+        src="logo-url"
+      />
+<h3>{resData.data.name}</h3> // if ur confused why im writing resData.data.name read about chaining concept in javascript 
+<h4>{resData.data.cuisines.join(", ")}</h4>
+//if ur thinking what is join here just forget about react learn javascript first this is array.join() property 
+<h4>{resData.data.avgRating} STARS</h4>
+<h5>{resData.data.costForTwo/100}</h5>
+<h4>{resData.data.deliveryTime} minutes </h4>
+</div>
+);
+};
+
+concept- cloudinary Image Id
+-The Cloudinary image ID, or public ID, is a string that uniquely identifies a specific image in your Cloudinary account. It is typically set by the user during the upload process or automatically generated by Cloudinary if not explicitly provided. The public ID can be used to construct the URL for accessing the image through Cloudinary's content delivery network (CDN).
+-this is cdn when we build large application we put all the images in cdn.
+
+example -
+cloudinaryImageId": "a46a6aa00709f771fabb45c864a81b5e"
+
+url-
+https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/9ec9ffd900c24ef751e2f34ba3d2fd4b
+
+if u change the Id in this URL u will see different image,i will change the cloudinaryimageId of this url
+
+->
+https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/a46a6aa00709f771fabb45c864a81b5e
+-now the image is changed
+
+NOW LETS UPDATE OUR RESTAURANT CARDS IMAGES BY USING cloudinary imageIds
+
+const RestaurantCard = (props) => {
+const {resData} = props;
+return (
+
+<div className="res-card">
+<img
+className="res-logo"
+alt="res-logo"
+        src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + resData.data.cloudinaryImageId}
+      />
+<h3>{resData.data.name}</h3> // if ur confused why im writing resData.data.name read about chaining concept in javascript 
+<h4>{resData.data.cuisines.join(", ")}</h4>
+//if ur thinking what is join here just forget about react learn javascript first this is array.join() property 
+<h4>{resData.data.avgRating} STARS</h4>
+<h5>{resData.data.costForTwo/100}</h5>
+<h4>{resData.data.deliveryTime} minutes </h4>
+</div>
+);
+};
+
+now our card is become truly dynamic
+
+//1.46min multicards remaining
+
+this card
+in this part i will show u the beauty of writing reusable components.remember whenever u will build production ready app always make reusable components .just because i have created reusable card component im able to pass dynamic props inside it.
+
+///part 3
+lets clean the code
+
+1.  this is not good way of writing code very compicated.
+
+    <h4>{resData.data.avgRating} STARS</h4>
+    <h5>{resData.data.costForTwo/100}</h5>
+    <h4>{resData.data.deliveryTime} minutes </h4>
+
+a good way to write this to destructer it
+-i will suggest u to revise the optional chaining concept in javascript
+
+const RestaurantCard = (props) => {
+const {resData} = props;
+
+const {
+cloudinaryImageId,
+name,
+avgRating,
+cuisines,
+costForTwo,
+deliveryTime,
+} = resData?.data; // ? -> optional chaining c
+return (
+
+<div className="res-card">
+<img
+className="res-logo"
+alt="res-logo"
+        src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + resData.data.cloudinaryImageId}
+      />
+<h3>{name}</h3> 
+<h4>{cuisines.join(", ")}</h4>
+<h4>{avgRating} STARS</h4>
+<h5>{costForTwo/100}</h5>
+<h4>{deliveryTime} minutes </h4>
+</div>
+);
+};
+
+this is still looking ugly right?lets optimize it more
+
+2.this needs to be fix not looking good
+
+-one suggestion from my side revise array method map() in javascript.otherwise u will get confused
+
+<div className="res-container">
+{restList.map((restaurant) => (
+    <RestaurantCard resData={restaurant} />
+
+))
+
+</div>}
+//In the code snippet, I use the map function to iterate over the restList array, which contains restaurant data. For each restaurant, a <RestaurantCard> component is rendered, passing the restaurant data as a prop (resData). The entire list of restaurant cards is enclosed in a <div> with the class "res-container," creating a clean and efficient way to display a dynamic list of restaurant cards in a React
+
+Note-
+u will get warning by react here and the warning is -
+Each child in a list should have a unique "Key" prop.
+it means each of this list items should be uniquly presented each item should have Keys,whenever u are looping on to any list u have to give a key
